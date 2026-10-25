@@ -1,1 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jayasree Ragas Lyrics | Admin</title>
 
+    <style>
+        :root {
+            --maroon: #6b1730;
+            --gold: #d6ad55;
+            --cream: #fff9ed;
+            --text: #34232a;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: var(--cream);
+            color: var(--text);
+        }
+
+        header {
+            background: var(--maroon);
+            color: var(--white);
+            padding: 24px 16px;
+            text-align: center;
+            border-bottom: 4px solid var(--gold);
+        }
+
+        header h1 {
+            margin: 0 0 8px;
+            font-size: 26px;
+        }
+
+        header p {
+            margin: 0;
+            color: #f5dfad;
+        }
+
+        main {
+            width: min(900px, 94%);
+            margin: 30px auto;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 24px;
+            border-radius: 14px;
+            margin-bottom: 22px;
+            box-shadow: 0 3px 14px #00000010;
+            border: 1px solid #eadfce;
+        }
+
+        h2 {
+            color: var(--maroon);
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin: 16px 0 7px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbbdb4;
+            border-radius: 7px;
+            font: inherit;
+            background: white;
+        }
+
+        textarea {
+            min-height: 220px;
+            resize: vertical;
+            line-height: 1.7;
+        }
+
+        button {
+            background: var(--maroon);
+            color: white;
+            border: none;
+            border-radius: 7px;
+            padding: 12px 18px;
+            margin: 16px 8px 0 0;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #4e1022;
+        }
+
+        button.secondary {
+            background: #725d48;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .notice {
+            padding: 13px;
+            border-radius: 7px;
+            background: #fff2d5;
+            border: 1px solid #e8d09c;
+            line-height: 1.6;
+        }
+
+        #status {
+            margin-top: 15px;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .song-item {
+            border-top: 1px solid #eadfce;
+            padding: 14px 0;
+        }
+
+        .song-item h3 {
+            margin: 0 0 6px;
+            color: var(--maroon);
+        }
+
+        .song-item p {
+            margin: 0;
+            color: #66545b;
+        }
+
+        footer {
+            text-align: center;
+            padding: 24px 12px;
+            color: #725d48;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>Jayasree Ragas Lyrics</h1>
+    <p>Private Administration Portal</p>
+</header>
+
+<main>
+
+    <section class="card" id="loginSection">
+        <h2>Administrator Login</h2>
+
+        <p>
+            Sign in with the administrator account created for
+            Jayasree Ragas Lyrics.
+        </p>
+
+        <form id="loginForm">
+            <label for="email">Admin Email</label>
+            <input
+                id="email"
+                type="email"
+                autocomplete="username"
+                placeholder="Enter your admin email"
+                required
+            >
+
+            <label for="password">Password</label>
+            <input
+                id="password"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Enter your password"
+                required
+            >
+
+            <button type="submit">Sign In</button>
+        </form>
+
+        <div id="loginStatus" role="status"></div>
+
+        <p class="notice">
+            This page requires Supabase configuration before login
+            will work. Database access must also be protected by
+            server-side permissions.
+        </p>
+    </section>
+
+    <section class="card hidden" id="dashboardSection">
+        <h2>Admin Dashboard</h2>
+
+        <p id="welcomeMessage">Administrator</p>
+
+        <div class="notice">
+            <strong>Ganesa Collection</strong><br>
+            Use this area to manage the song titles and lyrics
+            extracted and checked against your master PDF.
+        </div>
+
+        <button id="showSongsButton" type="button">
+            View Songs
+        </button>
+
+        <button id="newSongButton" type="button">
+            Add New Song
+        </button>
+
+        <button id="logoutButton" class="secondary" type="button">
+            Sign Out
+        </button>
+    </section>
+
+    <section class="card hidden" id="songFormSection">
+        <h2 id="songFormTitle">Add Song</h2>
+
+        <form id="songForm">
+            <input type="hidden" id="songId">
+
+            <label for="songTitle">Song Title</label>
+            <input
+                id="songTitle"
+                type="text"
+                maxlength="200"
+                required
+            >
+
+            <label for="category">Category</label>
+            <select id="category" required>
+                <option value="GANESA">GANESA</option>
+                <option value="GURU">GURU</option>
+                <option value="AYYAPPAN">AYYAPPAN</option>
+                <option value="KRISHNA">KRISHNA</option>
+                <option value="RAMAR">RAMAR</option>
+                <option value="SARASWATHI">SARASWATHI</option>
+                <option value="PERUMAL">PERUMAL</option>
+                <option value="LAKSHMI">LAKSHMI</option>
+                <option value="AMMAN SONGS">AMMAN SONGS</option>
+                <option value="MURUGAN">MURUGAN</option>
+                <option value="KAMAKSHI VRUTHAM">KAMAKSHI VRUTHAM</option>
+                <option value="ABHIRAMI ANTHATHI">ABHIRAMI ANTHATHI</option>
+                <option value="MARRIAGE SONGS">MARRIAGE SONGS</option>
+            </select>
+
+            <label for="language">Language</label>
+            <select id="language">
+                <option value="Tamil">Tamil</option>
+                <option value="Malayalam">Malayalam</option>
+                <option value="Sanskrit">Sanskrit</option>
+                <option value="Telugu">Telugu</option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="lyrics">Lyrics</label>
+            <textarea
+                id="lyrics"
+                placeholder="Enter the verified lyrics here..."
+            ></textarea>
+
+            <label for="displayOrder">Display Order</label>
+            <input
+                id="displayOrder"
+                type="number"
+                min="0"
+                value="0"
+            >
+
+            <label>
+                <input
+                    id="published"
+                    type="checkbox"
+                    style="width:auto"
+                >
+                Publish this song
+            </label>
+
+            <button type="submit">Save Song</button>
+            <button
+                id="cancelSongButton"
+                class="secondary"
+                type="button"
+            >
+                Cancel
+            </button>
+        </form>
+
+        <div id="songStatus" role="status"></div>
+    </section>
+
+    <section class="card hidden" id="songsSection">
+        <h2>Song Collection</h2>
+        <div id="songsList">No songs loaded yet.</div>
+    </section>
+
+    <section class="card">
+        <h2>Setup Status</h2>
+        <p id="setupStatus">
+            Supabase connection has not been configured.
+        </p>
+    </section>
+
+</main>
+
+<footer>
+    Jayasree Ragas Lyrics · Admin Portal
+</footer>
+
+<script type="module">
+    /*
+     * NEXT STEP:
+     * We will connect this page to Supabase after configuring
+     * administrator permissions and verifying the account.
+     *
+     * Do not put your database password or Supabase service-role
+     * key in this file.
+     *
+     * Song editing is intentionally not enabled until the secure
+     * database connection and authorization are configured.
+     */
+
+    const loginForm = document.getElementById("loginForm");
+    const loginStatus = document.getElementById("loginStatus");
+    const setupStatus = document.getElementById("setupStatus");
+
+    loginForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        loginStatus.textContent =
+            "The login connection is not configured yet. " +
+            "Please complete the database security setup first.";
+    });
+
+    document.getElementById("showSongsButton").addEventListener(
+        "click",
+        function () {
+            document.getElementById("songsSection").classList.remove("hidden");
+        }
+    );
+
+    document.getElementById("newSongButton").addEventListener(
+        "click",
+        function () {
+            document.getElementById("songFormSection").classList.remove("hidden");
+        }
+    );
+
+    document.getElementById("cancelSongButton").addEventListener(
+        "click",
+        function () {
+            document.getElementById("songFormSection").classList.add("hidden");
+        }
+    );
+
+    document.getElementById("songForm").addEventListener(
+        "submit",
+        function (event) {
+            event.preventDefault();
+
+            document.getElementById("songStatus").textContent =
+                "Saving is not enabled yet. The secure database connection " +
+                "must be configured first.";
+        }
+    );
+
+    document.getElementById("logoutButton").addEventListener(
+        "click",
+        function () {
+            document.getElementById("dashboardSection").classList.add("hidden");
+            document.getElementById("songFormSection").classList.add("hidden");
+            document.getElementById("songsSection").classList.add("hidden");
+            document.getElementById("loginSection").classList.remove("hidden");
+            loginStatus.textContent = "";
+        }
+    );
+
+    setupStatus.textContent =
+        "Admin page created. Supabase authentication and secure " +
+        "database permissions are the next setup steps.";
+</script>
+
+</body>
+</html>
